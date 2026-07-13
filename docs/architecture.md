@@ -2,7 +2,7 @@
 
 ## Overview
 
-Diff Radar is a single-route React Router v7 (framework mode) app. A user submits a
+Diff Radar is a single-route React Router v8 (framework mode) app. A user submits a
 dialect, a database connection, and a SQL query; the server opens a connection, runs the
 dialect's EXPLAIN variant, normalizes the result into a common plan tree, and derives a
 plain-English summary and a list of anti-pattern warnings — all in one request/response cycle.
