@@ -2,7 +2,7 @@
 
 ## Plain Node runtime, not Cloudflare Workers
 
-The sibling `portfolio` project runs on Cloudflare Workers/Pages, but Query Explainer targets a
+The sibling `portfolio` project runs on Cloudflare Workers/Pages, but Diff Radar targets a
 plain Node server (`@react-router/node`/`@react-router/serve`) instead. The `pg`, `mssql`, and
 `better-sqlite3` drivers are native Node modules that don't run on Workers' edge runtime, and this
 app's core job — opening arbitrary TCP connections to user-supplied databases — doesn't fit an

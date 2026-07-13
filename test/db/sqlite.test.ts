@@ -7,7 +7,7 @@ import { sqliteAdapter } from "~/lib/db/sqlite";
 
 // The adapter opens its own connection per explainQuery() call by file path, so tests use a
 // throwaway temp file rather than a shared :memory: handle (which only one connection can see).
-const dbPath = path.join(tmpdir(), `query-explainer-test-${Date.now()}.sqlite`);
+const dbPath = path.join(tmpdir(), `diff-radar-test-${Date.now()}.sqlite`);
 
 afterEach(() => {
   try {

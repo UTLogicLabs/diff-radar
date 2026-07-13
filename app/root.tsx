@@ -63,7 +63,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body className="bg-background text-foreground font-sans antialiased min-h-screen">
         <header className="border-b border-border">
           <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-            <h1 className="font-semibold">Query Explainer</h1>
+            <h1 className="font-semibold">Diff Radar</h1>
             <ThemeToggle />
           </div>
         </header>
