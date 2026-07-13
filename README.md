@@ -1,87 +1,86 @@
-# Welcome to React Router!
+# Query Explainer
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Paste a SQL query, pick a dialect, and get back:
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+- a **plain-English summary** of what the query does (joins, filters, aggregations, sorting, limits)
+- the **EXPLAIN plan visualized as a tree**, with expensive nodes highlighted
+- **warnings** for common anti-patterns: `SELECT *`, missing-index candidates (full scans on large
+  tables), and N+1-shaped correlated subqueries
 
-## Features
+Supports **Postgres**, **MSSQL**, and **SQLite** behind one dialect-agnostic plan representation.
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+Visual theme (light/dark/system) is ported from the sibling
+[portfolio](https://github.com/UTLogicLabs) project.
 
-## Getting Started
+## How it works
 
-### Installation
+1. Enter a dialect and a connection (a connection string, or discrete host/user/password fields;
+   SQLite takes a file path instead).
+2. Paste a SQL query and submit.
+3. The server runs that dialect's non-destructive `EXPLAIN` variant by default — see
+   [docs/security.md](docs/security.md) for why `EXPLAIN ANALYZE` (which actually executes the
+   query) is opt-in only.
+4. The raw plan is normalized into one common tree shape, summarized in English via
+   [`node-sql-parser`](https://github.com/taozhi8833998/node-sql-parser), and scanned for
+   anti-patterns — see [docs/architecture.md](docs/architecture.md) for the full data flow and
+   [docs/decisions.md](docs/decisions.md) for the reasoning behind the stack choices.
 
-Install the dependencies:
+## Getting started
+
+Requires Node 22+.
 
 ```bash
 npm install
-```
-
-### Development
-
-Start the development server with HMR:
-
-```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+The app is available at `http://localhost:5173`. It runs as a plain Node server — no external
+services are required to start it; you only need a live Postgres/MSSQL/SQLite database to actually
+explain a query against.
 
-## Building for Production
+## Scripts
 
-Create a production build:
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the dev server with HMR |
+| `npm run build` | Production build |
+| `npm start` | Run the production build (`npm run build` first) |
+| `npm run typecheck` | Generate route types and run `tsc --noEmit` |
+| `npm test` | Run the test suite (Vitest) |
 
-```bash
-npm run build
-```
+## Testing
+
+`npm test` runs without any live database: SQLite tests use a real temporary `better-sqlite3` file,
+and Postgres/MSSQL normalization is tested against recorded `EXPLAIN`/`ShowPlanXML` fixtures in
+`test/fixtures/`. See [docs/architecture.md](docs/architecture.md) for how the dialect adapters are
+structured.
+
+## Docs
+
+- [docs/architecture.md](docs/architecture.md) — dialect adapter abstraction, shared SQL-parsing
+  seam, plan-tree visualization
+- [docs/decisions.md](docs/decisions.md) — key technical decisions and why
+- [docs/security.md](docs/security.md) — EXPLAIN ANALYZE opt-in model, credential handling
 
 ## Deployment
 
-### Docker Deployment
-
-To build and run using Docker:
+### Docker
 
 ```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+docker build -t query-explainer .
+docker run -p 3000:3000 query-explainer
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+### DIY
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
+Deploy the output of `npm run build`:
 
 ```
 ├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
+├── package-lock.json
 ├── build/
 │   ├── client/    # Static assets
 │   └── server/    # Server-side code
 ```
 
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+Then run `npm start` (or `react-router-serve ./build/server/index.js` directly).
