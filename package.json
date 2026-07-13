@@ -1,0 +1,40 @@
+{
+  "name": "query-explainer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@react-router/node": "8.0.0",
+    "@react-router/serve": "8.0.0",
+    "better-sqlite3": "^12.11.1",
+    "fast-xml-parser": "^5.10.0",
+    "isbot": "^5.1.36",
+    "mssql": "^12.7.0",
+    "node-sql-parser": "^5.4.0",
+    "pg": "^8.22.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router": "8.0.0"
+  },
+  "devDependencies": {
+    "@react-router/dev": "8.0.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/mssql": "^12.3.0",
+    "@types/node": "^22",
+    "@types/pg": "^8.20.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5.9.3",
+    "vite": "^8.0.3",
+    "vitest": "^4.1.10"
+  }
+}

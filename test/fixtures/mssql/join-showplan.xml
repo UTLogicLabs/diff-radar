@@ -1,0 +1,22 @@
+<ShowPlanXML>
+  <BatchSequence>
+    <Batch>
+      <Statements>
+        <StmtSimple>
+          <QueryPlan>
+            <RelOp NodeId="0" PhysicalOp="Hash Match" LogicalOp="Inner Join" EstimateRows="100" EstimateIO="10" EstimateCPU="5">
+              <Hash>
+                <RelOp NodeId="1" PhysicalOp="Table Scan" LogicalOp="Table Scan" EstimateRows="50000" EstimateIO="80" EstimateCPU="20">
+                  <Object Table="[orders]" />
+                </RelOp>
+                <RelOp NodeId="2" PhysicalOp="Clustered Index Scan" LogicalOp="Index Seek" EstimateRows="100" EstimateIO="5" EstimateCPU="2">
+                  <Object Table="[users]" Index="[PK_users]" />
+                </RelOp>
+              </Hash>
+            </RelOp>
+          </QueryPlan>
+        </StmtSimple>
+      </Statements>
+    </Batch>
+  </BatchSequence>
+</ShowPlanXML>
