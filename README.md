@@ -1,4 +1,4 @@
-# Query Explainer
+# Diff Radar
 
 Paste a SQL query, pick a dialect, and get back:
 
@@ -10,7 +10,7 @@ Paste a SQL query, pick a dialect, and get back:
 Supports **Postgres**, **MSSQL**, and **SQLite** behind one dialect-agnostic plan representation.
 
 Visual theme (light/dark/system) is ported from the sibling
-[portfolio](https://github.com/UTLogicLabs) project.
+[portfolio](https://github.com/UTLogicLabs/portfolio) project.
 
 ## How it works
 
@@ -67,8 +67,8 @@ structured.
 ### Docker
 
 ```bash
-docker build -t query-explainer .
-docker run -p 3000:3000 query-explainer
+docker build -t diff-radar .
+docker run -p 3000:3000 diff-radar
 ```
 
 ### DIY

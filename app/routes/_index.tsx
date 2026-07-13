@@ -14,7 +14,7 @@ import type { Warning } from "~/lib/sql/antipatterns";
 
 export function meta() {
   return [
-    { title: "Query Explainer" },
+    { title: "Diff Radar" },
     { name: "description", content: "Paste a SQL query and get a plain-English breakdown plus a visualized execution plan." },
   ];
 }
